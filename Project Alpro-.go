@@ -78,8 +78,10 @@ func tampilkanStatistik() {
             totalDaurUlang += s.Jumlah
         }
     }
-    fmt.Println("📈 Total sampah:", total)
-    fmt.Println("♻️  Total yang didaur ulang:", totalDaurUlang)
+    fmt.Println("📈 Total sampah:", total ,"Kg")
+    fmt.Println("♻️  Total yang didaur ulang:", totalDaurUlang, "Kg")
+    fmt.Println("♻️  Persentase yang didaur ulang:", float64(totalDaurUlang)/float64(total)*100, "%") //New
+    fmt.Println("♻️  Persentase yang tidak didaur ulang:", float64(total-totalDaurUlang)/float64(total)*100, "%")
 }
 
 func selectionSortByJumlah() {
