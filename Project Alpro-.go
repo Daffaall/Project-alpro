@@ -218,9 +218,12 @@ func main() {
         case "0":
             fmt.Println("Keluar aplikasi.")
             return
+        
+        case "alamak":
+            fmt.Println("\nAplikasi ini adalah aplikasi pengelolaan sampah yang dapat digunakan untuk menambah, mengubah, menghapus, dan mencari data sampah. \nSelain itu, aplikasi ini juga dapat menampilkan statistik pengelolaan sampah dan mengurutkan data berdasarkan jumlah atau jenis sampah.")
 
         default:
-            fmt.Println("❌ Pilihan tidak valid.")
+            fmt.Println("\n❌ Pilihan tidak valid.")
         }
     }
 }
