@@ -20,13 +20,13 @@ var dataSampah []Sampah
 
 func tambahSampah(jenis string, jumlah int, daurUlang bool, metode string) {
     dataSampah = append(dataSampah, Sampah{jenis, jumlah, daurUlang, metode})
-    fmt.Println("✅ Data sampah berhasil ditambahkan.")
+    fmt.Println("\n✅ Data sampah berhasil ditambahkan.")
 }
 
 func ubahSampah(index int, jenis string, jumlah int, daurUlang bool, metode string) {
     if index >= 0 && index < len(dataSampah) {
         dataSampah[index] = Sampah{jenis, jumlah, daurUlang, metode}
-        fmt.Println("✅ Data berhasil diubah.")
+        fmt.Println("\n✅ Data berhasil diubah.")
     } else {
         fmt.Println("❌ Index tidak valid.")
     }
@@ -35,7 +35,7 @@ func ubahSampah(index int, jenis string, jumlah int, daurUlang bool, metode stri
 func hapusSampah(index int) {
     if index >= 0 && index < len(dataSampah) {
         dataSampah = append(dataSampah[:index], dataSampah[index+1:]...)
-        fmt.Println("✅ Data berhasil dihapus.")
+        fmt.Println("\n✅ Data berhasil dihapus.")
     } else {
         fmt.Println("❌ Index tidak valid.")
     }
@@ -78,7 +78,7 @@ func tampilkanStatistik() {
             totalDaurUlang += s.Jumlah
         }
     }
-    fmt.Println("📈 Total sampah:", total ,"Kg")
+    fmt.Println("\n📈 Total sampah:", total ,"Kg")
     fmt.Println("♻️  Total yang didaur ulang:", totalDaurUlang, "Kg")
     fmt.Println("♻️  Persentase yang didaur ulang:", float64(totalDaurUlang)/float64(total)*100, "%") //New
     fmt.Println("♻️  Persentase yang tidak didaur ulang:", float64(total-totalDaurUlang)/float64(total)*100, "%")
@@ -201,11 +201,11 @@ func main() {
 
         case "7":
             selectionSortByJumlah()
-            fmt.Println("✅ Diurutkan berdasarkan jumlah (selection sort).")
+            fmt.Println("\n✅ Diurutkan berdasarkan jumlah (selection sort).")
 
         case "8":
             insertionSortByJenis()
-            fmt.Println("✅ Diurutkan berdasarkan jenis (insertion sort).")
+            fmt.Println("\n✅ Diurutkan berdasarkan jenis (insertion sort).")
 
         case "9":
             for i, s := range dataSampah {
