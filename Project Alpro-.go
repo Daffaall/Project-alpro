@@ -206,10 +206,13 @@ func main() {
         case "8":
             insertionSortByJenis()
             fmt.Println("\n✅ Diurutkan berdasarkan jenis (insertion sort).")
+            for i, s := range dataSampah {
+                fmt.Printf("[%d] %s - %dkg - Daur ulang: %v - Metode: %s\n", i, s.Jenis, s.Jumlah, s.DaurUlang, s.MetodeDaurUlang)
+            }
 
         case "9":
             for i, s := range dataSampah {
-                fmt.Printf("[%d] %s - %dkg - Daur ulang: %v - Metode: %s\n", i, s.Jenis, s.Jumlah, s.DaurUlang, s.MetodeDaurUlang)
+                fmt.Printf("\n[%d] %s - %dkg - Daur ulang: %v - Metode: %s\n", i, s.Jenis, s.Jumlah, s.DaurUlang, s.MetodeDaurUlang)
             }
 
         case "0":
