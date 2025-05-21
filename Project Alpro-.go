@@ -4,7 +4,6 @@ import (
     "bufio"
     "fmt"
     "os"
-    "sort"
     "strconv"
     "strings"
 )
@@ -50,10 +49,20 @@ func sequentialSearch(jenis string) int {
     return -1
 }
 
+func urutkanDataSampah() {
+    for i := 1; i < len(dataSampah); i++ {
+        key := dataSampah[i]
+        j := i - 1
+        for j >= 0 && dataSampah[j].Jenis > key.Jenis {
+            dataSampah[j+1] = dataSampah[j]
+            j--
+        }
+        dataSampah[j+1] = key
+    }
+}
+
 func binarySearch(jenis string) int {
-    sort.Slice(dataSampah, func(i, j int) bool {
-        return dataSampah[i].Jenis < dataSampah[j].Jenis
-    })
+    urutkanDataSampah()
 
     left, right := 0, len(dataSampah)-1
     for left <= right {
@@ -68,6 +77,7 @@ func binarySearch(jenis string) int {
     }
     return -1
 }
+
 
 func tampilkanStatistik() {
     total := 0
