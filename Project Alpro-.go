@@ -40,14 +40,27 @@ func hapusSampah(index int) {
     }
 }
 
+func toLower(s string) string {
+    result := ""
+    for _, c := range s {
+        if c >= 'A' && c <= 'Z' {
+            c += 'a' - 'A'
+        }
+        result += string(c)
+    }
+    return result
+}
+
 func sequentialSearch(jenis string) int {
+    jenis = toLower(jenis)
     for i, s := range dataSampah {
-        if strings.EqualFold(s.Jenis, jenis) {
+        if toLower(s.Jenis) == jenis {
             return i
         }
     }
     return -1
 }
+
 
 func urutkanDataSampah() {
     for i := 1; i < len(dataSampah); i++ {
