@@ -7,7 +7,6 @@ import (
     "strconv"
     "strings"
 )
-
 type Sampah struct {
     Jenis            string
     Jumlah           int
@@ -134,6 +133,13 @@ func insertionSortByJenis() {
 func main() {
     scanner := bufio.NewScanner(os.Stdin)
 
+    dataSampah = append(dataSampah,
+        Sampah{"Plastik", 10, true, "Dilelehkan"},
+        Sampah{"Kertas", 5, true, "Didaur ulang jadi kertas baru"},
+        Sampah{"Logam", 8, true, "Dilebur"},
+        Sampah{"Organik", 15, false, ""},
+        Sampah{"Kaca", 6, true, "Dilebur dan dicetak ulang"},
+    )
     for {
         fmt.Println("\n===== APLIKASI PENGELOLAAN SAMPAH =====")
         fmt.Println("1. Tambah Data Sampah")
