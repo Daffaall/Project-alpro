@@ -226,7 +226,6 @@ func insertionSortByJenis() {
 	}
 }
 
-// Handler functions for each menu option
 func handleTambahSampah(scanner *bufio.Scanner) {
 	fmt.Print("Masukkan jenis sampah (Organik, Anorganik, atau B3): ")
 	scanner.Scan()
