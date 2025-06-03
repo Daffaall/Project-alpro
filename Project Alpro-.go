@@ -17,50 +17,16 @@ type Sampah struct {
 
 var dataSampah []Sampah
 
-func tambahSampah(jenis string, jumlah int, daurUlang bool, metode string) error {
-	if jenis == "" {
-		return fmt.Errorf("jenis sampah tidak valid: tidak boleh kosong atau hanya angka")
-	}
-
-	if jumlah <= 0 {
-		return fmt.Errorf("jumlah sampah harus lebih dari 0")
-	}
-
-	if daurUlang && metode == "" {
-		return fmt.Errorf("metode daur ulang harus diisi jika sampah didaur ulang")
-	}
-
+func tambahSampah(jenis string, jumlah int, daurUlang bool, metode string) {
 	dataSampah = append(dataSampah, Sampah{jenis, jumlah, daurUlang, metode})
-	return nil
 }
 
-func ubahSampah(index int, jenis string, jumlah int, daurUlang bool, metode string) error {
-	if index < 0 || index >= len(dataSampah) {
-		return fmt.Errorf("index tidak valid")
-	}
-
-	if jenis == "" {
-		return fmt.Errorf("jenis sampah tidak boleh kosong")
-	}
-
-	if jumlah <= 0 {
-		return fmt.Errorf("jumlah sampah harus lebih dari 0")
-	}
-
-	if daurUlang && metode == "" {
-		return fmt.Errorf("metode daur ulang harus diisi jika sampah didaur ulang")
-	}
-
+func ubahSampah(index int, jenis string, jumlah int, daurUlang bool, metode string) {
 	dataSampah[index] = Sampah{jenis, jumlah, daurUlang, metode}
-	return nil
 }
 
-func hapusSampah(index int) error {
-	if index < 0 || index >= len(dataSampah) {
-		return fmt.Errorf("index tidak valid")
-	}
+func hapusSampah(index int) {
 	dataSampah = append(dataSampah[:index], dataSampah[index+1:]...)
-	return nil
 }
 
 func toLower(s string) string {
@@ -246,9 +212,10 @@ func handleTambahSampah(scanner *bufio.Scanner) {
 
 	fmt.Print("Apakah sampah akan didaur ulang? (y/n): ")
 	scanner.Scan()
-	daurUlang := strings.ToLower(scanner.Text())
+	daurUlangInput := strings.ToLower(scanner.Text())
+	daurUlang := false
 	metodeDaurUlang := ""
-	if daurUlang == "y" {
+	if daurUlangInput == "y" {
 		fmt.Print("Masukkan metode daur ulang sampah (A, B, atau C): ")
 		scanner.Scan()
 		metodeDaurUlang = scanner.Text()
@@ -256,16 +223,16 @@ func handleTambahSampah(scanner *bufio.Scanner) {
 			fmt.Println("❌ Metode daur ulang tidak valid")
 			return
 		}
-	} else if daurUlang != "y" && daurUlang != "n" {
-		fmt.Println("❌ Input tidak valid")
-		return
-	}
 
-	if err := tambahSampah(jenisSampah, jumlahSampah, daurUlang == "y", metodeDaurUlang); err != nil {
-		fmt.Println("\n❌ Proses tambah data sampah gagal", err)
-	} else {
-		fmt.Println("\n✅ Data sampah berhasil ditambahkan.")
-	}
+	} else if daurUlangInput == "n" {
+        daurUlang = false
+    } else {
+        fmt.Println("❌ Input tidak valid")
+        return
+    }
+
+    tambahSampah(jenisSampah, jumlahSampah, daurUlang, metodeDaurUlang)
+    fmt.Println("\n✅ Data sampah berhasil ditambahkan.")
 }
 
 func handleUbahSampah(scanner *bufio.Scanner) {
@@ -303,9 +270,10 @@ func handleUbahSampah(scanner *bufio.Scanner) {
 
 	fmt.Print("Apakah sampah akan didaur ulang? (y/n): ")
 	scanner.Scan()
-	daurUlangBaru := strings.ToLower(scanner.Text())
+	daurUlangBaruInput := strings.ToLower(scanner.Text())
+	daurUlangBaru := false
 	metodeBaru := ""
-	if daurUlangBaru == "y" {
+	if daurUlangBaruInput == "y" {
 		fmt.Print("Masukkan metode daur ulang yang baru (A, B, atau C): ")
 		scanner.Scan()
 		metodeBaru = scanner.Text()
@@ -313,16 +281,15 @@ func handleUbahSampah(scanner *bufio.Scanner) {
 			fmt.Println("❌ Metode daur ulang yang baru tidak valid")
 			return
 		}
-	} else if daurUlangBaru != "y" && daurUlangBaru != "n" {
-		fmt.Println("❌ Input tidak valid")
-		return
-	}
+	} else if daurUlangBaruInput == "n" {
+        daurUlangBaru = false
+    } else {
+        fmt.Println("❌ Input tidak valid") 
+        return
+    }
 
-	if err := ubahSampah(idx, jenisSampahBaru, jumlahSampahBaru, daurUlangBaru == "y", metodeBaru); err != nil {
-		fmt.Println("❌ Data sampah gagal diubah", err)
-	} else {
-		fmt.Println("\n✅ Data sampah berhasil diubah.")
-	}
+    ubahSampah(idx, jenisSampahBaru, jumlahSampahBaru, daurUlangBaru, metodeBaru)
+    fmt.Println("\n✅ Data sampah berhasil diubah.")
 }
 
 func handleHapusSampah(scanner *bufio.Scanner) {
@@ -341,11 +308,8 @@ func handleHapusSampah(scanner *bufio.Scanner) {
 		return
 	}
 
-	if err := hapusSampah(idx); err != nil {
-		fmt.Println("❌ Data sampah gagal dihapus", err)
-	} else {
-		fmt.Println("\n✅ Data sampah berhasil dihapus.")
-	}
+	hapusSampah(idx)
+	fmt.Println("\n✅ Data sampah berhasil dihapus.")
 }
 
 func handleTampilkanStatistik() {
