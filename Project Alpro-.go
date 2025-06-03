@@ -394,6 +394,7 @@ func handleUrutkanByJumlah() {
 		return
 	}
 	selectionSortByJumlah()
+    tampilkanSemuaData()
 	fmt.Println("\n✅ Data sampah diurutkan berdasarkan jumlah sampah (selection sort).")
 }
 
@@ -403,6 +404,7 @@ func handleUrutkanByJenis() {
 		return
 	}
 	insertionSortByJenis()
+    tampilkanSemuaData()
 	fmt.Println("\n✅ Data sampah diurutkan berdasarkan jenis (insertion sort).")
 }
 
