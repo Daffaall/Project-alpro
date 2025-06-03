@@ -144,28 +144,30 @@ func binarySearch(jenis string) {
 	displayDataFooter()
 }
 
-func tampilkanStatistik() error {
-	if len(dataSampah) == 0 {
-		return fmt.Errorf(", tidak ada data sampah")
-	}
+func tampilkanStatistik() { 
+    total := 0
+    totalDaurUlang := 0
+    for _, s := range dataSampah {
+        total += s.Jumlah
+        if s.DaurUlang {
+            totalDaurUlang += s.Jumlah
+        }
+    }
 
-	total := 0
-	totalDaurUlang := 0
-	for _, s := range dataSampah {
-		total += s.Jumlah
-		if s.DaurUlang {
-			totalDaurUlang += s.Jumlah
-		}
-	}
+    fmt.Println("\n📈 STATISTIK SAMPAH")
+    fmt.Println("╔═════════════════════════════════════════════╗")
+    fmt.Printf("║ %-30s ║ %-8dkg ║\n", "Total sampah yang terkumpul", total)
+    fmt.Printf("║ %-30s ║ %-8dkg ║\n", "Total sampah yang didaur ulang", totalDaurUlang)
+    persentaseDaurUlang := 0.0
+    persentaseTidakDaurUlang := 0.0
+    if total > 0 {
+        persentaseDaurUlang = float64(totalDaurUlang) / float64(total) * 100
+        persentaseTidakDaurUlang = float64(total-totalDaurUlang) / float64(total) * 100
+    }
 
-	fmt.Println("\n📈 STATISTIK SAMPAH")
-	fmt.Println("╔═════════════════════════════════════════════╗")
-	fmt.Printf("║ %-30s ║ %-8dkg ║\n", "Total sampah yang terkumpul", total)
-	fmt.Printf("║ %-30s ║ %-8dkg ║\n", "Total sampah yang didaur ulang", totalDaurUlang)
-	fmt.Printf("║ %-30s ║ %-9.2f%% ║\n", "Persentase didaur ulang", float64(totalDaurUlang)/float64(total)*100)
-	fmt.Printf("║ %-30s ║ %-9.2f%% ║\n", "Persentase tidak didaur ulang", float64(total-totalDaurUlang)/float64(total)*100)
-	fmt.Println("╚═════════════════════════════════════════════╝")
-	return nil
+    fmt.Printf("║ %-30s ║ %-9.2f%% ║\n", "Persentase didaur ulang", persentaseDaurUlang)
+    fmt.Printf("║ %-30s ║ %-9.2f%% ║\n", "Persentase tidak didaur ulang", persentaseTidakDaurUlang)
+    fmt.Println("╚═════════════════════════════════════════════╝")
 }
 
 func selectionSortByJumlah() {
@@ -313,9 +315,12 @@ func handleHapusSampah(scanner *bufio.Scanner) {
 }
 
 func handleTampilkanStatistik() {
-	if err := tampilkanStatistik(); err != nil {
-		fmt.Println("❌ Gagal menampilkan statistik", err)
-	}
+    if len(dataSampah) == 0 {
+        fmt.Println("❌ Tidak ada statistik data sampah untuk ditampilkan")
+        return
+    }
+
+    tampilkanStatistik()
 }
 
 func handleSequentialSearch(scanner *bufio.Scanner) {
