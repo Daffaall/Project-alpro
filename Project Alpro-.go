@@ -96,6 +96,18 @@ func sequentialSearch(jenis string) {
 	}
 }
 
+func insertionSortByJenis() {
+	for i := 1; i < len(dataSampah); i++ {
+		key := dataSampah[i]
+		j := i - 1
+		for j >= 0 && toLower(dataSampah[j].Jenis) > toLower(key.Jenis) {
+			dataSampah[j+1] = dataSampah[j]
+			j--
+		}
+		dataSampah[j+1] = key
+	}
+}
+
 func binarySearch(jenis string) {
 	insertionSortByJenis()
 
@@ -167,18 +179,6 @@ func selectionSortByJumlah() {
 			}
 		}
 		dataSampah[i], dataSampah[min] = dataSampah[min], dataSampah[i]
-	}
-}
-
-func insertionSortByJenis() {
-	for i := 1; i < len(dataSampah); i++ {
-		key := dataSampah[i]
-		j := i - 1
-		for j >= 0 && toLower(dataSampah[j].Jenis) > toLower(key.Jenis) {
-			dataSampah[j+1] = dataSampah[j]
-			j--
-		}
-		dataSampah[j+1] = key
 	}
 }
 
