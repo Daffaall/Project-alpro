@@ -96,20 +96,8 @@ func sequentialSearch(jenis string) {
 	}
 }
 
-func urutkanDataSampah() {
-	for i := 1; i < len(dataSampah); i++ {
-		key := dataSampah[i]
-		j := i - 1
-		for j >= 0 && dataSampah[j].Jenis > key.Jenis {
-			dataSampah[j+1] = dataSampah[j]
-			j--
-		}
-		dataSampah[j+1] = key
-	}
-}
-
 func binarySearch(jenis string) {
-	urutkanDataSampah()
+	insertionSortByJenis()
 
 	jenis = toLower(jenis)
 	indeksAwal, indeksAkhir := 0, len(dataSampah)-1
@@ -256,7 +244,8 @@ func handleUbahSampah(scanner *bufio.Scanner) {
 	fmt.Print("Masukkan jenis sampah yang baru (Organik, Anorganik, atau B3): ")
 	scanner.Scan()
 	jenisSampahBaru := scanner.Text()
-	if (toLower(jenisSampahBaru) != "organik" && toLower(jenisSampahBaru) != "anorganik" && toLower(jenisSampahBaru) != "b3") || toLower(jenisSampahBaru) == "" {
+	if (toLower(jenisSampahBaru) != "organik" && toLower(jenisSampahBaru) != "anorganik" && toLower(jenisSampahBaru) != "b3") || 
+		toLower(jenisSampahBaru) == "" {
 		fmt.Println("❌ Jenis sampah yang baru tidak valid")
 		return
 	}
@@ -332,7 +321,8 @@ func handleSequentialSearch(scanner *bufio.Scanner) {
 	fmt.Print("Cari data dari jenis sampah (Organik, Anorganik, atau B3) (sequential): ")
 	scanner.Scan()
 	jenisSampah := scanner.Text()
-	if (toLower(jenisSampah) != "organik" && toLower(jenisSampah) != "anorganik" && toLower(jenisSampah) != "b3") || toLower(jenisSampah) == "" {
+	if (toLower(jenisSampah) != "organik" && toLower(jenisSampah) != "anorganik" && toLower(jenisSampah) != "b3") ||
+		toLower(jenisSampah) == "" {
 		fmt.Println("❌ Jenis sampah tidak valid")
 		return
 	}
@@ -349,7 +339,8 @@ func handleBinarySearch(scanner *bufio.Scanner) {
 	fmt.Print("Cari data dari jenis sampah (Organik, Anorganik, atau B3) (binary): ")
 	scanner.Scan()
 	jenisSampah := scanner.Text()
-	if (toLower(jenisSampah) != "organik" && toLower(jenisSampah) != "anorganik" && toLower(jenisSampah) != "b3") || toLower(jenisSampah) == "" {
+	if (toLower(jenisSampah) != "organik" && toLower(jenisSampah) != "anorganik" && toLower(jenisSampah) != "b3") || 
+		toLower(jenisSampah) == "" {
 		fmt.Println("❌ Jenis sampah tidak valid")
 		return
 	}
