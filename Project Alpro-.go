@@ -203,7 +203,7 @@ func handleTambahSampah(scanner *bufio.Scanner) {
 	fmt.Print("Apakah sampah akan didaur ulang? (y/n): ")
 	scanner.Scan()
 	daurUlangInput := strings.ToLower(scanner.Text())
-	daurUlang := false
+	daurUlang := true
 	metodeDaurUlang := ""
 	if daurUlangInput == "y" {
 		fmt.Print("Masukkan metode daur ulang sampah (A, B, atau C): ")
@@ -262,7 +262,7 @@ func handleUbahSampah(scanner *bufio.Scanner) {
 	fmt.Print("Apakah sampah akan didaur ulang? (y/n): ")
 	scanner.Scan()
 	daurUlangBaruInput := strings.ToLower(scanner.Text())
-	daurUlangBaru := false
+	daurUlangBaru := true
 	metodeBaru := ""
 	if daurUlangBaruInput == "y" {
 		fmt.Print("Masukkan metode daur ulang yang baru (A, B, atau C): ")
